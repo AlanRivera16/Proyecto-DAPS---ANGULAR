@@ -1,0 +1,56 @@
+<h1 class="text-white mt-5">Agregar Productos</h1>
+<div class="row justify-content-around">
+  <form class="col-6 m-3">
+    <div class="form-group">
+      <label for="" class="text-white">Nombre</label>
+      <input type="Text" class="form-control" id="nombre" >
+    </div>
+    <div class="form-group">
+      <label for="" class="text-white">Precio Unitario</label>
+      <input type="number" class="form-control" id="precio" >
+    </div>
+    <div class="form-group">
+      <label for="" class="text-white">Categoría</label>
+      <input type="Text" class="form-control" id="categoria" >
+    </div>
+    <div class="form-group">
+      <label for="" class="text-white">Disponibilidad</label>
+      <input type="text" class="form-control" id="disponible" placeholder="false/true">
+    </div>
+    <div class="form-group">
+      <label for="" class="text-white">Usuario</label>
+      <input type="Text" class="form-control" id="usr" >
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">+ Agregar</button>
+  </form>
+</div>
+
+<div class="mt-5 rounded p-4">
+  <table class="table rounded">
+      <thead class="thead-light text-dark">
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Disponibilidad</th>
+          <th scope="col">Editar</th>
+        </tr>
+      </thead>
+      <tbody class="bg-dark">
+        <tr>
+          <td class="text-light">Nombre</td>
+          <td class="text-light">$ Precio</td>
+          <td class="text-light">Categoria</td>
+          <td class="text-light">Usuario</td>
+          <td class="text-light">True</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <button type="button" class="btn btn-primary">Edit</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
