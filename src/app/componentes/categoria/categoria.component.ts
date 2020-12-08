@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { error } from 'protractor';
 import { CafeteriaService } from 'src/app/services/cafeteria.service';
 
 @Component({
@@ -12,10 +13,17 @@ export class CategoriaComponent implements OnInit {
 
   category: any[]=[];
   ngOnInit(): void {
-    this.cafServ.getParaCatg().subscribe((data:any)=>{
+    this.obtenerCat();
+  }
+
+  obtenerCat(){
+    this.cafServ.getParaCatg().then((data:any)=>{
       this.category=data['categorias'];
       console.log(this.category);
-    });
+    }).catch(error => {
+      console.log(error);
+      
+    })
   }
 
 }

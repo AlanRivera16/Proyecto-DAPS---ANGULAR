@@ -11,10 +11,16 @@ export class AgregarusrComponent implements OnInit {
   constructor(private cafServ: CafeteriaService) { }
   users:any[]=[];
   ngOnInit(): void {
-    this.cafServ.getParaUser().subscribe((data:any)=>{
+    this.obtenerUsr();
+  }
+
+  obtenerUsr(){
+    this.cafServ.getParaUser().then((data:any)=>{
       this.users=data['usuarios'];
       console.log(this.users);
-    });
+    }).catch( error=>{
+      console.log('Algo falló')
+    })
   }
 
 }
