@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CafeteriaService } from 'src/app/services/cafeteria.service';
 
 @Component({
   selector: 'app-libros',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LibrosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cafServ: CafeteriaService) { }
 
+  product : any[] = [];
   ngOnInit(): void {
+    this.cafServ.getParaProduct().subscribe((data:any)=>{
+      this.product=data['productos'];
+      console.log(this.product);
+    });
   }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CafeteriaService } from 'src/app/services/cafeteria.service';
+
 
 @Component({
   selector: 'app-usuarios',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuariosComponent implements OnInit {
 
-  constructor() { }
-
+  
+  constructor(private cafServ: CafeteriaService) { }
+  
+  //users: any[]=[] ;
   ngOnInit(): void {
+    // this.cafServ.getParaUser().subscribe((data:any)=>{
+    //   this.users=data['usuarios'];
+    //   console.log(this.users);
+    // });
   }
+
+
 
 }

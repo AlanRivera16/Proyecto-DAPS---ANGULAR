@@ -33,17 +33,15 @@
           <th scope="col">Precio</th>
           <th scope="col">Categoria</th>
           <th scope="col">Usuario</th>
-          <th scope="col">Disponibilidad</th>
           <th scope="col">Editar</th>
         </tr>
       </thead>
-      <tbody class="bg-dark">
+      <tbody class="bg-dark" *ngFor="let prd of product">
         <tr>
-          <td class="text-light">Nombre</td>
-          <td class="text-light">$ Precio</td>
-          <td class="text-light">Categoria</td>
-          <td class="text-light">Usuario</td>
-          <td class="text-light">True</td>
+          <td class="text-light">{{prd.nombre}}</td>
+          <td class="text-light">{{prd.precioU}}</td>
+          <td class="text-light">{{prd.categoria}}</td>
+          <td class="text-light">{{prd.usuario.nombre}}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
               <button type="button" class="btn btn-primary">Edit</button>

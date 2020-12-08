@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from '@angular/common/http'
+
 //componentes
 
 import {  LibrosComponent   } from './componentes/libros/libros.component'
@@ -11,7 +13,8 @@ import {  HomeComponent   } from './componentes/shared/home/home.component'
 import {  NavbarComponent   } from './componentes/shared/navbar/navbar.component'
 import {  PrestamosComponent   } from './componentes/prestamos/prestamos.component';
 import { AcercadeComponent } from './componentes/acercade/acercade.component';
-import { CategoriaComponent } from './componentes/categoria/categoria.component'
+import { CategoriaComponent } from './componentes/categoria/categoria.component';
+import { AgregarusrComponent } from './componentes/agregarusr/agregarusr.component'
 
 @NgModule({
   declarations: [
@@ -21,11 +24,13 @@ import { CategoriaComponent } from './componentes/categoria/categoria.component'
     HomeComponent,
     NavbarComponent,
     AcercadeComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    AgregarusrComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
