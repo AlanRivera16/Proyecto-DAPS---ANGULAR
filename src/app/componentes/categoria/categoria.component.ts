@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { error } from 'protractor';
 import { CafeteriaService } from 'src/app/services/cafeteria.service';
+import swal from 'sweetalert2'
+
+const Toast = swal.mixin({
+  toast: true,
+  position: 'bottom-right',
+  showConfirmButton: false,
+  timer: 4000
+})
 
 @Component({
   selector: 'app-categoria',
@@ -15,6 +23,8 @@ export class CategoriaComponent implements OnInit {
   users: any[]=[];  //Esto es para obtenerIDUsr() (Propiedad insertada en el Select del Form)
   categoria: Categorias = new Categorias; //Esto se relaciona con la clase Categoria y es para registrarCatg()
   idActCat:any // Esto es para nuestro propiedad para saber qeu actualizará y funciona en 2 de nuestras funciones idAct(), actualizarCat()
+
+  @Output() salida = new EventEmitter;
 
   ngOnInit(): void {
     this.obtenerCat();
@@ -33,9 +43,13 @@ export class CategoriaComponent implements OnInit {
 
   //Funcion para agregar Productos
   registrarCatg(){
-    this.cafServ.postParaCat(this.categoria).then((resp:any)=>{
-      console.log(resp);
+    this.cafServ.postParaCat(this.categoria).then((data:any)=>{
+      Toast.fire(data.msg, '', 'success')
+      this.salida.emit();
+      console.log(data);
     }).catch(error=>{
+      Toast.fire(error.error.msg, '', 'error');
+        this.salida.emit();
       console.log(error);
     })
     console.log(this.categoria);
@@ -53,9 +67,13 @@ export class CategoriaComponent implements OnInit {
   actualizarCat(){
     this.cafServ.putParaCatg(this.categoria, this.idActCat).then((data:any)=>{
       this.categoria=data;
+      Toast.fire(data.msg, '', 'success')
+      this.salida.emit();
       console.log(this.categoria);
       
     }).catch((error)=>{
+      Toast.fire(error.error.msg, '', 'error');
+        this.salida.emit();
       console.log('Algo salió mal', error);
       
     })
@@ -65,9 +83,13 @@ export class CategoriaComponent implements OnInit {
   eliminarCat(){
     this.cafServ.deletParaCat(this.categoria, this.idActCat).then((data:any)=>{
       this.categoria=data;
+      Toast.fire(data.msg, '', 'success')
+      this.salida.emit();
       console.log(this.categoria);
       
     }).catch((error)=>{
+      Toast.fire(error.error.msg, '', 'error');
+        this.salida.emit();
       console.log('Algo salió mal', error);
       
     })

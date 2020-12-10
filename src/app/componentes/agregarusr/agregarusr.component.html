@@ -1,7 +1,7 @@
 <a class="display-4 text-light p-1 pl-4">Insertar usuarios</a>
 <div class="row justify-content-around">
     <div class="col-4 mt-5 bg-dark rounded">
-      <form class="m-4" (ngSubmit)="registrarUsr()">
+      <form class="m-4">
         <div class="form-group">
           <label for="" class="text-white">Nombre</label>
           <input
@@ -41,7 +41,7 @@
             name="pass" [(ngModel)]="usuarioss.password" #pass="ngModel"
           />
         </div>
-        <button type="submit" class="btn btn-primary mt-4">+ Agregar</button>
+        <button type="submit" class="btn btn-primary mt-4" (click)=registrarUsr()>+ Agregar</button>
       </form>
     </div>
   

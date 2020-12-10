@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { error } from 'protractor';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CafeteriaService } from 'src/app/services/cafeteria.service';
+import swal from 'sweetalert2'
+
+const Toast = swal.mixin({
+  toast: true,
+  position: 'bottom-right',
+  showConfirmButton: false,
+  timer: 4000
+})
 
 @Component({
   selector: 'app-libros',
@@ -17,6 +23,8 @@ export class LibrosComponent implements OnInit {
   users : any[] = [];
   producto: Producto = new Producto;
   idActPrd:any
+
+  @Output() salida = new EventEmitter;
 
   ngOnInit(): void {
     this.obtenerPrd();
@@ -38,9 +46,13 @@ export class LibrosComponent implements OnInit {
 
   //Funcion para agregar Productos
   registrarPrd(){
-    this.cafServ.postParaProduct(this.producto).then((resp:any)=>{
-      console.log(resp);
+    this.cafServ.postParaProduct(this.producto).then((data:any)=>{
+      Toast.fire(data.msg, '', 'success')
+      this.salida.emit();
+      console.log(data);
     }).catch(error=>{
+      Toast.fire(error.error.msg, '', 'error');
+        this.salida.emit();
       console.log(error);
     })
     console.log(this.producto);
@@ -70,9 +82,13 @@ export class LibrosComponent implements OnInit {
     actualizarPrd(){
       this.cafServ.putParaProduct(this.producto, this.idActPrd).then((data:any)=>{
         this.producto=data;
+        Toast.fire(data.msg, '', 'success')
+        this.salida.emit();
         console.log(this.producto);
 
       }).catch((error)=>{
+        Toast.fire(error.error.msg, '', 'error');
+        this.salida.emit();
         console.log('Algo salió mal', error);
       })
     }
@@ -81,9 +97,13 @@ export class LibrosComponent implements OnInit {
     eliminarPrd(){
       this.cafServ.deletParaProduct(this.producto, this.idActPrd).then((data:any)=>{
         this.producto=data;
+        Toast.fire(data.msg, '', 'success')
+        this.salida.emit();
         console.log(this.producto);
 
       }).catch((error)=>{
+        Toast.fire(error.error.msg, '', 'error');
+        this.salida.emit();
         console.log('Algo salió mal', error);
       })
     }

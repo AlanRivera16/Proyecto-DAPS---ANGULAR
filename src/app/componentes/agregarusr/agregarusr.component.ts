@@ -1,5 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CafeteriaService } from 'src/app/services/cafeteria.service';
+import swal from 'sweetalert2'
+
+const Toast = swal.mixin({
+  toast: true,
+  position: 'bottom-right',
+  showConfirmButton: false,
+  timer: 4000
+})
+
+
+
 
 @Component({
   selector: 'app-agregarusr',
@@ -13,6 +24,8 @@ export class AgregarusrComponent implements OnInit {
   users:any[]=[];
   usuarioss: Usuarios = new Usuarios;
   idActUsr:any
+  
+  @Output() salida = new EventEmitter;
 
   ngOnInit(): void {
     this.obtenerUsr();
@@ -30,22 +43,31 @@ export class AgregarusrComponent implements OnInit {
 
   //Funcion para agregar Usuario
   registrarUsr(){
-    this.cafServ.postParaUsr(this.usuarioss).then((resp:any)=>{
-      console.log(resp);
+    this.cafServ.postParaUsr(this.usuarioss).then((data:any)=>{
+      Toast.fire(data.msg, '', 'success')
+      this.salida.emit();
+      console.log(data);
     }).catch(error=>{
+      Toast.fire(error.error.msg, '', 'error');
+        this.salida.emit();
+      console.log(error);
       console.log(error);
     })
-    console.log(this.usuarioss);
+      console.log(this.usuarioss);
+    
   }
   //Funcion para actualizar Usuario
   actualizarUsr(){
     this.cafServ.putParaUser(this.usuarioss, this.idActUsr).then((data:any)=>{
       this.usuarioss=data;
+      Toast.fire(data.msg, '', 'success')
+      this.salida.emit();
       console.log(this.usuarioss);
       
     }).catch((error)=>{
+      Toast.fire(error.error.msg, '', 'error');
       console.log('Algo salió mal', error);
-      
+      this.salida.emit();
     })
   }
 
@@ -53,10 +75,14 @@ export class AgregarusrComponent implements OnInit {
   eliminarUsr(){
     this.cafServ.deletParaUser(this.usuarioss, this.idActUsr).then((data:any)=>{
       this.usuarioss=data;
+      Toast.fire(data.msg, '', 'success')
+      this.salida.emit();
       console.log(this.usuarioss);
       
     }).catch((error)=>{
+      Toast.fire(error.error.msg, '', 'error');
       console.log('Algo salió mal', error);
+      this.salida.emit();
       
     })
   }

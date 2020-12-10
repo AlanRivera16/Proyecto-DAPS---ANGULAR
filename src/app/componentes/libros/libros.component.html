@@ -12,9 +12,9 @@
     <div class="form-group">
       <label for="" class="text-white">Categoría</label>
       <div class="form-group">
-        <label for="" class="text-muted"><small> Elige ID de una Categoría</small></label>
+        <label for="" class="text-muted"><small> Elige una Categoría</small></label>
         <select class="form-control" name="cat" [(ngModel)]="producto.categoria" #cat="ngModel">
-          <option *ngFor="let item of category" [ngValue]="item">{{item._id}}</option>
+          <option *ngFor="let item of category" [ngValue]="item">{{item.descripcion}}</option>
         </select>
       </div>
       <!-- <input type="Text" class="form-control" name="cat" [(ngModel)]="producto.categoria" #cat="ngModel"> -->
@@ -22,9 +22,9 @@
     <div class="form-group">
       <label for="" class="text-white">Usuario</label>
       <div class="form-group">
-        <label for="" class="text-muted"><small> Elige ID de un Usuario</small></label>
+        <label for="" class="text-muted"><small> Elige un Usuario</small></label>
         <select class="form-control" name="usuario" [(ngModel)]="producto.usuario" #usuario="ngModel">
-          <option *ngFor="let item of users" [ngValue]="item">{{item._id}}</option>
+          <option *ngFor="let item of users" [ngValue]="item">{{item.nombre}}</option>
         </select>
       </div>
       <!-- <input type="Text" class="form-control" name="usuario" [(ngModel)]="producto.usuario" #usuario="ngModel"> -->
@@ -82,18 +82,18 @@
                         <div class="form-group">
                           <label for="" class="">Categoría</label>
                           <div class="form-group">
-                            <label for="" class=""><small> Elige ID de una Categoría</small></label>
+                            <label for="" class=""><small> Elige una Categoría</small></label>
                             <select class="form-control" name="cat" [(ngModel)]="producto.categoria" #cat="ngModel">
-                              <option *ngFor="let item of category" [ngValue]="item">{{item._id}}</option>
+                              <option *ngFor="let item of category" [ngValue]="item">{{item.descripcion}}</option>
                             </select>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="" class="">Usuario</label>
                           <div class="form-group">
-                            <label for="" class=""><small> Elige ID de un Usuario</small></label>
+                            <label for="" class=""><small> Elige un Usuario</small></label>
                             <select class="form-control" name="usuario" [(ngModel)]="producto.usuario" #usuario="ngModel">
-                              <option *ngFor="let item of users" [ngValue]="item">{{item._id}}</option>
+                              <option *ngFor="let item of users" [ngValue]="item">{{item.nombre}}</option>
                             </select>
                           </div>
                         </div>
