@@ -15,6 +15,15 @@ export class CafeteriaService {
   getParaUser(){
     return this.http.get(`${this.url}usuario`).toPromise();
   }
+  postParaUsr(usr:any){
+    return this.http.post(`${this.url}usuario`,usr).toPromise();
+  }
+  putParaUser(usr:any, id:string){
+    return this.http.put(`${this.url}usuario/${id}`,usr).toPromise();
+  }
+  deletParaUser(usr:any, id:string){
+    return this.http.delete(`${this.url}usuario/${id}`,usr).toPromise();
+  }
 
 
 
@@ -28,11 +37,26 @@ export class CafeteriaService {
   postParaProduct(pro:any){
     return this.http.post(`${this.url}productos`,pro).toPromise();
   }
+  putParaProduct(pro:any, id:string){
+    return this.http.put(`${this.url}productos/${id}`,pro).toPromise();
+  }
+  deletParaProduct(pro:any, id:string){
+    return this.http.delete(`${this.url}productos/${id}`,pro).toPromise();
+  }
 
 
 
   //Funciones para Categorias
   getParaCatg(){
     return this.http.get(`${this.url}categoria`).toPromise();
+  }
+  postParaCat(cat:any){
+    return this.http.post(`${this.url}categoria`,cat).toPromise();
+  }
+  putParaCatg(cat:any, id:string){
+    return this.http.put(`${this.url}categoria/${id}`,cat).toPromise();
+  }
+  deletParaCat(cat:any, id:string){
+    return this.http.delete(`${this.url}categoria/${id}`,cat).toPromise();
   }
 }

@@ -16,6 +16,7 @@ export class LibrosComponent implements OnInit {
   category : any[] = [];
   users : any[] = [];
   producto: Producto = new Producto;
+  idActPrd:any
 
   ngOnInit(): void {
     this.obtenerPrd();
@@ -25,6 +26,7 @@ export class LibrosComponent implements OnInit {
     
     // this.registrarPrd();
   }
+  //Funcion para traer info. de Productos
   obtenerPrd(){
     this.cafServ.getParaProduct().then((data:any)=>{
       this.product=data['productos'];
@@ -34,6 +36,7 @@ export class LibrosComponent implements OnInit {
     })
   }
 
+  //Funcion para agregar Productos
   registrarPrd(){
     this.cafServ.postParaProduct(this.producto).then((resp:any)=>{
       console.log(resp);
@@ -42,29 +45,59 @@ export class LibrosComponent implements OnInit {
     })
     console.log(this.producto);
   }
-  obtenerIDCat(){
-    this.cafServ.getParaCatg().then((data:any)=>{
-      this.category=data['categorias'];
-      console.log(this.category);
-    }).catch(error => {
-      console.log(error);
+        //Funcion para obtener el ID de una categoria para nuestro Select de CAT
+        obtenerIDCat(){
+          this.cafServ.getParaCatg().then((data:any)=>{
+            this.category=data['categorias'];
+            console.log(this.category);
+          }).catch(error => {
+            console.log(error);
+            
+          })
+        }
+              //Funcion para obtener el ID de un usuario para nuestro Select de USR
+              obtenerIDUsr(){
+                this.cafServ.getParaUser().then((data:any)=>{
+                  this.users=data['usuarios'];
+                  console.log(this.users);
+                }).catch( error=>{
+                  console.log('Algo falló')
+                })
+              }
+    
+
+    //Funcion para actualizar Productos
+    actualizarPrd(){
+      this.cafServ.putParaProduct(this.producto, this.idActPrd).then((data:any)=>{
+        this.producto=data;
+        console.log(this.producto);
+
+      }).catch((error)=>{
+        console.log('Algo salió mal', error);
+      })
+    }
+
+    //Funcion para eliminar Producto
+    eliminarPrd(){
+      this.cafServ.deletParaProduct(this.producto, this.idActPrd).then((data:any)=>{
+        this.producto=data;
+        console.log(this.producto);
+
+      }).catch((error)=>{
+        console.log('Algo salió mal', error);
+      })
+    }
+    
+    //Llamar ID
+    idAct(idPrd:string){
+      this.idActPrd=idPrd;
+      console.log(this.idActPrd);
       
-    })
-  }
-  obtenerIDUsr(){
-    this.cafServ.getParaUser().then((data:any)=>{
-      this.users=data['usuarios'];
-      console.log(this.users);
-    }).catch( error=>{
-      console.log('Algo falló')
-    })
-  }
+    }
 
 }
 
-
-
-
+//Modelo para ngModel
 class Producto{
 categoria: string
 nombre: string
